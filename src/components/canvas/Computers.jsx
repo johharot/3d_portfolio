@@ -10,19 +10,19 @@ const Computers = ({ isMobile }) => {
     <mesh>
       <hemisphereLight intensity={0.95} groundColor='black' />
       <spotLight
-        position={[-100, 50, -20]}
+        position={[-100, 50, -10]}
         angle={0.12}
         penumbra={1}
-        intensity={4000}
+        intensity={9000}
         castShadow
         shadow-mapSize={1024}
       />
-      <pointLight intensity={1} />
+      <pointLight intensity={0} />
 
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -4.90, -1.5]}
+        scale={isMobile ? 0.25 : 0.60}
+        position={isMobile ? [0, -1.8, -0.5] : [0, -2.50, -1.0]}
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -34,7 +34,7 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 500px)');
+    const mediaQuery = window.matchMedia('(max-width: 600px)');
 
     setIsMobile(mediaQuery.matches);
 
@@ -51,11 +51,13 @@ const ComputersCanvas = () => {
 
 
   return (
+   
     <Canvas
       frameLoop='demand'
       shadows
       camera={{ position: [20, 3, 5], fov: 25 }}
       gl={{ preserveDrawingBuffer: true }}
+      style={{ position: 'relative', zIndex: 0 }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
@@ -67,6 +69,7 @@ const ComputersCanvas = () => {
       </Suspense>
       <Preload all />
     </Canvas>
+    
   )
 }
 
